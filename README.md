@@ -40,3 +40,6 @@ Użytkownik ma możliwość przeglądania oferty filmowej. Klikając w miniaturk
 - Klient wyłącza stronę w dowolnej chwili, przez co wszystkie zebrane dane na jego temat zostają anulowane
 - Klient każdy krok może cofnąć, dopóki nie dokonał płatności
 - Podczas gdy płatność została odrzucona, użytkownik dostaje maila z informacją o niepowodzeniu transakcji, może ją powtórzyć ponownie wpisując dane płatności
+
+# Testowanie
+Każde większe zmiany wprowadzane do serwisu są najpierw testowane poprzez testerów manualny na etapie walidacji. Następnie przeprowadza się też testy na etapie produkcyjnym, oraz zbiera wywiad i opinie użytkowników. Testy są prowadzone pod kątem wyłapania jakichkolwiek sytuacji niezgodnych z wymaganiami produktu, pod kątem wydajności, zabezpieczeń oraz poprawności działania aplikacji.
