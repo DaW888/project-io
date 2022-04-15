@@ -5,4 +5,7 @@ module.exports = {
     defaultLocale: 'en',
   },
   reactStrictMode: true,
+  images: {
+    domains: ['imdb-api.com'],
+  },
 };
