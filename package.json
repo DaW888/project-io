@@ -15,6 +15,11 @@
     "validate": "yarn run prettier --list-different && yarn run lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.8.8",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@nextui-org/react": "^1.0.8-beta.5",
+    "framer-motion": "^6",
     "next": "^12.1.5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
