@@ -1,13 +1,62 @@
-import { useRouter } from 'next/router';
+import React from 'react';
+import { GetServerSideProps, NextPage } from 'next';
+import { getMovie, Movie } from 'database';
+import Image from 'next/image';
+import { Avatar, List } from 'antd';
 
-import React, { FC } from 'react';
+interface Props {
+  movie: Movie | null;
+}
+const MovieId: NextPage<Props> = ({ movie }) => {
+  if (!movie) return <div>Movie not found</div>;
 
-const MovieId: FC = () => {
-  const router = useRouter();
-  const { id } = router.query;
-  console.log(id);
-
-  return <div>{id}</div>;
+  return (
+    <div className='align-center flex min-h-screen w-full flex-col items-center'>
+      <Image src={movie.image} alt={movie.title} width={300} height={450} />
+      <div className='w-full md:w-1/2'>
+        <h1 className='text-4xl font-bold'>{movie.title}</h1>
+        <p>rank: {movie.rank}</p>
+        <p>year: {movie.year}</p>
+        <p>director: {movie.directors}</p>
+        <p>genres: {movie.genres.join(', ')}</p>
+        <p>awards: {movie.awards}</p>
+        <p>crew: {movie.crew}</p>
+        <p>release date: {movie.releaseDate}</p>
+        <p>duration: {movie.runtimeStr}</p>
+        <p>plot: {movie.plot}</p>
+        <h2>Actors</h2>
+        <List
+          itemLayout='horizontal'
+          dataSource={movie.actorList}
+          renderItem={actor => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={<Avatar src={actor.image} size='large' />}
+                title={actor.role}
+                description={actor.name}
+              />
+            </List.Item>
+          )}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default MovieId;
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const id = context.query.id;
+  if (typeof id !== 'string') {
+    return {
+      props: {
+        movie: null,
+      },
+    };
+  }
+  const movie = getMovie(id);
+
+  return {
+    props: { movie },
+  };
+};
