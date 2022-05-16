@@ -24,6 +24,7 @@ export interface Movie {
   awards: string;
   directors: string;
   actorList: { name: string; image: string; role: string }[];
+  similars: { id: string; title: string; image: string; rating: string }[];
   genres: string[];
 }
 
@@ -58,5 +59,11 @@ export const getMovie = (id: string): Movie | null => {
       role: actor.asCharacter,
     })),
     genres: movie.genres.split(', '),
+    similars: movie.similars.map(similar => ({
+      id: similar.id,
+      title: similar.title,
+      image: similar.image,
+      rating: similar.imDbRating,
+    })),
   };
 };

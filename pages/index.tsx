@@ -36,7 +36,7 @@ const Home: NextPage<Props> = ({ overviews }) => {
           style={{ width: '50%' }}
         />
       </nav>
-      <div className='movies-container grid bg-black'>
+      <div className='movies-container'>
         {movies.map(overview => (
           <MovieCard key={overview.id} id={overview.id} title={overview.title} image={overview.image} />
         ))}

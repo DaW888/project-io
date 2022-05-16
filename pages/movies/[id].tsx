@@ -2,12 +2,15 @@ import React from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 import { getMovie, Movie } from 'database';
 import Image from 'next/image';
-import { Avatar, List } from 'antd';
+import { Avatar, Card, List } from 'antd';
+import { useRouter } from 'next/router';
 
 interface Props {
   movie: Movie | null;
 }
 const MovieId: NextPage<Props> = ({ movie }) => {
+  const router = useRouter();
+
   if (!movie) return <div>Movie not found</div>;
 
   return (
@@ -38,6 +41,19 @@ const MovieId: NextPage<Props> = ({ movie }) => {
             </List.Item>
           )}
         />
+        <div className='similar-movies-container'>
+          {movie.similars.map(similar => (
+            <Card
+              hoverable
+              onClick={() => router.push(`/movies/${similar.id}`)}
+              key={similar.id}
+              style={{ width: 120 }}
+              cover={<Image width={120} height={200} alt='example' src={similar.image} />}
+            >
+              <p>{similar.title}</p>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );
