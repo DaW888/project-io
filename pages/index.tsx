@@ -2,10 +2,10 @@ import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { getOverview, Overview } from '../database';
 import MovieCard from '@components/MovieCard';
-import { Grid } from '@nextui-org/react';
-import { Input } from '@chakra-ui/react';
 import { useState } from 'react';
+import { Input } from 'antd';
 
+const { Search } = Input;
 interface Props {
   overviews: Overview[];
 }
@@ -22,22 +22,25 @@ const Home: NextPage<Props> = ({ overviews }) => {
   };
 
   return (
-    <div className='align-center justify-center bg-black px-12 text-white'>
+    <div className='align-center flex min-h-full w-full flex-col justify-center bg-black px-12 text-white'>
       <Head>
         <title>Hi</title>
         <meta name='description' content='Hello in the template' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <nav className='sticky top-0 left-0 z-50 flex w-full justify-center bg-black py-8'>
-        <Input width={'30vw'} onInput={e => search(e.currentTarget.value)} placeholder='Search' />
+        <Search
+          placeholder='Search movie'
+          onChange={e => search(e.currentTarget.value)}
+          allowClear
+          style={{ width: '50%' }}
+        />
       </nav>
-      <Grid.Container className='mt-12' wrap='wrap' gap={2} justify='center'>
+      <div className='movies-container grid bg-black'>
         {movies.map(overview => (
-          <Grid xs key={overview.id}>
-            <MovieCard title={overview.title} image={overview.image} />
-          </Grid>
+          <MovieCard key={overview.id} id={overview.id} title={overview.title} image={overview.image} />
         ))}
-      </Grid.Container>
+      </div>
     </div>
   );
 };

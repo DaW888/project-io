@@ -1,52 +1,29 @@
-import { Button, Card, Row, Text } from '@nextui-org/react';
 import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { Button, Card } from 'antd';
+import Image from 'next/image';
 
 interface Props {
   image: string;
   title: string;
+  id: string;
 }
 
-const MovieCard: FC<Props> = ({ title, image }) => (
-  <Card cover css={{ w: 300, h: 400 }}>
-    <Card.Header css={{ position: 'absolute', zIndex: 1, top: 5, bgBlur: '#ffffffff' }}>
-      <Button flat auto rounded color='secondary'>
-        <Text h2 weight='bold' color='white' css={{ textShadow: '4px 4px 4px solid black' }}>
-          {title}
-        </Text>
-      </Button>
-    </Card.Header>
-    <Card.Body>
-      <Card.Image src={image} height={400} width='100%' alt='Card example background' />
-    </Card.Body>
-    <Card.Footer
-      blur
-      css={{
-        position: 'absolute',
-        bgBlur: '#ffffff',
-        borderTop: '$borderWeights$light solid rgba(255, 255, 255, 0.2)',
-        bottom: 0,
-        zIndex: 1,
-      }}
-    >
-      <Row justify='space-around'>
-        <Button bordered auto rounded color='gradient'>
-          <Text css={{ color: 'inherit' }} size={12} weight='bold' transform='uppercase'>
-            12:00
-          </Text>
-        </Button>
-        <Button bordered auto rounded color='gradient'>
-          <Text css={{ color: 'inherit' }} size={12} weight='bold' transform='uppercase'>
-            14:00
-          </Text>
-        </Button>
-        <Button bordered auto rounded color='gradient'>
-          <Text css={{ color: 'inherit' }} size={12} weight='bold' transform='uppercase'>
-            20:00
-          </Text>
-        </Button>
-      </Row>
-    </Card.Footer>
-  </Card>
-);
+const MovieCard: FC<Props> = ({ id, title, image }) => {
+  const router = useRouter();
+
+  return (
+    <Card style={{ width: 300 }} cover={<Image width={300} height={450} alt='example' src={image} />}>
+      <div className='cursor-pointer ' onClick={() => router.push(`movies/${id}`)}>
+        <h2 className='text-md hover:text-blue-400'>{title}</h2>
+      </div>
+      <div className='mt-4 flex justify-center gap-3'>
+        <Button>10:00</Button>
+        <Button>16:00</Button>
+        <Button>20:00</Button>
+      </div>
+    </Card>
+  );
+};
 
 export default MovieCard;
