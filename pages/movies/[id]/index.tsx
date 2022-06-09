@@ -2,7 +2,7 @@ import React from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 import { getMovie, Movie } from 'database';
 import Image from 'next/image';
-import { Avatar, Card, List } from 'antd';
+import { Avatar, Button, Card, List } from 'antd';
 import { useRouter } from 'next/router';
 
 interface Props {
@@ -16,6 +16,9 @@ const MovieId: NextPage<Props> = ({ movie }) => {
   return (
     <div className='align-center flex min-h-screen w-full flex-col items-center'>
       <Image src={movie.image} alt={movie.title} width={300} height={450} />
+      <Button className='my-4' type='primary' onClick={() => router.push(`/movies/${movie?.id}/tickets`)}>
+        BUY TICKET
+      </Button>
       <div className='w-full md:w-1/2'>
         <h1 className='text-4xl font-bold'>{movie.title}</h1>
         <p>rank: {movie.rank}</p>
