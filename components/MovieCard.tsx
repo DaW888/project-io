@@ -2,6 +2,9 @@ import { FC } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Card } from 'antd';
 import Image from 'next/image';
+import { useRecoilState } from 'recoil';
+import { dateState } from '../context';
+import { getTime } from '../utils';
 
 interface Props {
   image: string;
@@ -11,6 +14,12 @@ interface Props {
 
 const MovieCard: FC<Props> = ({ id, title, image }) => {
   const router = useRouter();
+  const [, setDate] = useRecoilState(dateState);
+
+  const selectTime = (h: number, m: number) => {
+    setDate(getTime(h, m));
+    router.push(`/movies/${id}/tickets`);
+  };
 
   return (
     <Card style={{ width: 300 }} cover={<Image width={300} height={450} alt='example' src={image} />}>
@@ -18,9 +27,9 @@ const MovieCard: FC<Props> = ({ id, title, image }) => {
         <h2 className='text-md hover:text-blue-400'>{title}</h2>
       </div>
       <div className='mt-4 flex justify-center gap-3'>
-        <Button>10:00</Button>
-        <Button>16:00</Button>
-        <Button>20:00</Button>
+        <Button onClick={() => selectTime(10, 0)}>10:00</Button>
+        <Button onClick={() => selectTime(16, 0)}>16:00</Button>
+        <Button onClick={() => selectTime(20, 0)}>20:00</Button>
       </div>
     </Card>
   );
