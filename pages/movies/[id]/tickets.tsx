@@ -6,7 +6,7 @@ import { lightFormat } from 'date-fns';
 import { AvailableSeances } from '@components/AvailableSeances';
 import { AvailableSeats } from '@components/AvailableSeats';
 import Payment from '@components/Payment';
-import PersonalData from '@components/PersonalData';
+import PersonalDataForm from '@components/PersonalDataForm';
 
 interface Props {
   movie: Movie | null;
@@ -37,7 +37,7 @@ const Tickets: NextPage<Props> = ({ movie }) => {
       {date && <AvailableSeats />}
       <br />
       {date && <Payment seats={seats} />}
-      {toPay != 0 && <PersonalData />}
+      {toPay != 0 && <PersonalDataForm />}
     </div>
   );
 };

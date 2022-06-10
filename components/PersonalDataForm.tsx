@@ -1,19 +1,42 @@
 import { Button, Form, Input, Spin } from 'antd';
 import { FC, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { toPayState } from '../context';
+import { checkPayment, sendEmail } from '../utils';
 
-const PersonalData: FC = () => {
+const PersonalDataForm: FC = () => {
+  const [toPay] = useRecoilState(toPayState);
   const [loading, setLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('');
   const [completed, setCompleted] = useState(false);
-  const onFinish = () => {
+  const onFinish = async (value: any) => {
     setLoading(true);
-    setTimeout(() => {
+    setLoadingMessage('Processing Payment...');
+    const payed = await checkPayment(value.name, value.email, value.cardNumber, toPay, value.ccv);
+    if (!payed) {
+      setLoadingMessage('Payment Failed');
+      return;
+    }
+    setLoadingMessage('Payment Success! Sending Email...');
+
+    const sent = await sendEmail(value.name, value.email, toPay);
+    if (!sent) {
+      setLoadingMessage('Can not send Email');
       setLoading(false);
-      setCompleted(true);
-    }, 3000);
+      return;
+    }
+    setLoading(false);
+    setCompleted(true);
   };
 
-  if (loading) return <Spin size='large' />;
-  if (completed) return <h1>Thank you for your order!</h1>;
+  if (loading)
+    return (
+      <div className='flex h-1/4 flex-col items-center'>
+        <h1>{loadingMessage}</h1>
+        <Spin size='large' />;
+      </div>
+    );
+  if (completed) return <h1 className='h-[10vh] text-4xl text-emerald-500'>Thank you for your order!</h1>;
   return (
     <div className='flex w-full flex-col p-[4%]'>
       <h1 className='text-center text-4xl'>Fill Form</h1>
@@ -48,4 +71,4 @@ const PersonalData: FC = () => {
   );
 };
 
-export default PersonalData;
+export default PersonalDataForm;

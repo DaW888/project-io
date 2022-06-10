@@ -19,7 +19,7 @@ const MovieId: NextPage<Props> = ({ movie }) => {
       <Button className='my-4' type='primary' onClick={() => router.push(`/movies/${movie?.id}/tickets`)}>
         BUY TICKET
       </Button>
-      <div className='w-full md:w-1/2'>
+      <div className='w-full px-6 md:w-1/2 md:px-0'>
         <h1 className='text-4xl font-bold'>{movie.title}</h1>
         <p>rank: {movie.rank}</p>
         <p>year: {movie.year}</p>
