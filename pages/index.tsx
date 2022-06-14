@@ -10,7 +10,7 @@ interface Props {
   overviews: Overview[];
 }
 
-const Home: NextPage<Props> = ({ overviews }) => {
+const MovieList: NextPage<Props> = ({ overviews }) => {
   const [movies, setMovies] = useState<Overview[]>(overviews);
 
   const search = (e: string) => {
@@ -24,7 +24,7 @@ const Home: NextPage<Props> = ({ overviews }) => {
   return (
     <div className='align-center flex min-h-full w-full flex-col justify-center bg-black px-12 text-white'>
       <Head>
-        <title>Hi</title>
+        <title>Cinema</title>
         <meta name='description' content='Hello in the template' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
@@ -45,7 +45,7 @@ const Home: NextPage<Props> = ({ overviews }) => {
   );
 };
 
-export default Home;
+export default MovieList;
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
