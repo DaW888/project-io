@@ -12,15 +12,19 @@ interface Props {
   id: string;
 }
 
+// class
 const MovieCard: FC<Props> = ({ id, title, image }) => {
   const router = useRouter();
   const [, setDate] = useRecoilState(dateState);
 
+  // function
   const selectTime = (h: number, m: number) => {
+    //getTime jest z klasy utils
     setDate(getTime(h, m));
     router.push(`/movies/${id}/tickets`);
   };
 
+  // return JSX
   return (
     <Card style={{ width: 300 }} cover={<Image width={300} height={450} alt='example' src={image} />}>
       <div className='cursor-pointer ' onClick={() => router.push(`movies/${id}`)}>

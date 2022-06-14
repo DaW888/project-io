@@ -2,8 +2,11 @@ import { FC } from 'react';
 import { useRecoilState } from 'recoil';
 import { seatsState } from '../context';
 
+// class
 const Seat: FC<{ id: number; reserved: boolean }> = ({ id, reserved }) => {
+  // variable
   const [seats, setSeats] = useRecoilState(seatsState);
+  // private function void
   const reserve = () => {
     const newSeats = [...seats];
     newSeats[id] = !reserved;

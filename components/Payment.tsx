@@ -3,13 +3,18 @@ import { Radio } from 'antd';
 import { useRecoilState } from 'recoil';
 import { toPayState } from '../context';
 
+// private statyczna funkcja - Payment
 const countSeats = (seats: boolean[]) => {
   return seats.reduce((acc, cur) => (cur ? acc + 1 : acc), 0);
 };
 
+// class
 const Payment: FC<{ seats: boolean[] }> = ({ seats }) => {
+  // variable
   const [toPay, setToPay] = useRecoilState(toPayState);
+  // variable
   const [price, setPrice] = useState<number>(12);
+  // variable
   const [totalSeats, setTotalSeats] = useState<number>(0);
 
   useEffect(() => {

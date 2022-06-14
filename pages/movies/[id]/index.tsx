@@ -1,13 +1,16 @@
 import React from 'react';
 import { GetServerSideProps, NextPage } from 'next';
-import { getMovie, Movie } from 'database';
+import { getMovie } from 'database';
 import Image from 'next/image';
 import { Avatar, Button, Card, List } from 'antd';
 import { useRouter } from 'next/router';
+import { Movie } from '../../../types';
 
 interface Props {
   movie: Movie | null;
 }
+
+// class
 const MovieId: NextPage<Props> = ({ movie }) => {
   const router = useRouter();
 
@@ -64,6 +67,7 @@ const MovieId: NextPage<Props> = ({ movie }) => {
 
 export default MovieId;
 
+// agreguje częściowo database.getMovie()
 export const getServerSideProps: GetServerSideProps = async context => {
   const id = context.query.id;
   if (typeof id !== 'string') {

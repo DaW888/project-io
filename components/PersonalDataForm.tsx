@@ -4,11 +4,18 @@ import { useRecoilState } from 'recoil';
 import { toPayState } from '../context';
 import { checkPayment, sendEmail } from '../utils';
 
+// class
 const PersonalDataForm: FC = () => {
+  // variable
   const [toPay] = useRecoilState(toPayState);
+  // variable
   const [loading, setLoading] = useState(false);
+  // variable
   const [loadingMessage, setLoadingMessage] = useState('');
+  // variable
   const [completed, setCompleted] = useState(false);
+
+  // function onFinish (parametr: {name: string, email: string, cardNumber: number, ccv: number})
   const onFinish = async (value: any) => {
     setLoading(true);
     setLoadingMessage('Processing Payment...');
@@ -19,6 +26,7 @@ const PersonalDataForm: FC = () => {
     }
     setLoadingMessage('Payment Success! Sending Email...');
 
+    // sendEmail z utils - więc agreguje utils.sendEmail
     const sent = await sendEmail(value.name, value.email, toPay);
     if (!sent) {
       setLoadingMessage('Can not send Email');
@@ -29,6 +37,7 @@ const PersonalDataForm: FC = () => {
     setCompleted(true);
   };
 
+  // return JSX
   if (loading)
     return (
       <div className='flex h-1/4 flex-col items-center'>

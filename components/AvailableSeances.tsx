@@ -5,9 +5,11 @@ import { getTime } from '../utils';
 import { useRecoilState } from 'recoil';
 import { dateState } from '../context';
 
+// class
 export const AvailableSeances: FC = () => {
   const [, setDate] = useRecoilState(dateState);
 
+  // return JSX
   return (
     <>
       <h3 className='text-center text-2xl'>Available seances</h3>

@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { getMovie, Movie } from 'database';
+import { getMovie } from 'database';
 import { useRecoilState } from 'recoil';
 import { dateState, seatsState, toPayState } from '../../../context';
 import { lightFormat } from 'date-fns';
@@ -7,12 +7,15 @@ import { AvailableSeances } from '@components/AvailableSeances';
 import { AvailableSeats } from '@components/AvailableSeats';
 import Payment from '@components/Payment';
 import PersonalDataForm from '@components/PersonalDataForm';
+import { Movie } from '../../../types';
 
 interface Props {
   movie: Movie | null;
 }
 
+// class
 const Tickets: NextPage<Props> = ({ movie }) => {
+  // variables
   const [date] = useRecoilState(dateState);
   const [seats] = useRecoilState(seatsState);
   const [toPay] = useRecoilState(toPayState);

@@ -1,33 +1,11 @@
 import data from './movies.json';
+import { Movie, Overview } from '../types';
 
 const movies = data.items;
 
 export default movies;
 
-export interface Overview {
-  id: string;
-  title: string;
-  image: string;
-  genres: string[];
-}
-
-export interface Movie {
-  id: string;
-  rank: number;
-  title: string;
-  year: number;
-  image: string;
-  crew: string;
-  releaseDate: string;
-  runtimeStr: string;
-  plot: string;
-  awards: string;
-  directors: string;
-  actorList: { name: string; image: string; role: string }[];
-  similars: { id: string; title: string; image: string; rating: string }[];
-  genres: string[];
-}
-
+// public static
 export const getOverview = (): Overview[] => {
   return movies.map(movie => ({
     id: movie.id,
@@ -37,6 +15,7 @@ export const getOverview = (): Overview[] => {
   }));
 };
 
+// public static
 export const getMovie = (id: string): Movie | null => {
   const movie = movies.find(movie => movie.id === id);
   if (!movie) return null;

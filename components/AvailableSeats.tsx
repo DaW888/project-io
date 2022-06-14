@@ -3,9 +3,12 @@ import { useRecoilState } from 'recoil';
 import { seatsState } from '../context';
 import Seat from '@components/Seat';
 
+// class
 export const AvailableSeats: FC = () => {
+  // variable
   const [seats] = useRecoilState(seatsState);
 
+  // JSX
   return (
     <>
       <h3 className='text-center text-2xl'>Available Seats</h3>

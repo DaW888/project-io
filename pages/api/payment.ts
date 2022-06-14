@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+// zewnętrzny serwis
+// zwraca obiekt {success: boolean}
 export default function payment(req: NextApiRequest, res: NextApiResponse<{ success: boolean }>) {
   console.log(req.body.name, req.body.email, req.body.cardNumber, req.body.toPay, req.body.ccv);
   setTimeout(() => {
